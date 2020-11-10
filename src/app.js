@@ -4,8 +4,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { CLIENT_ORIGIN } = require("./config");
 const helmet = require("helmet");
-const { NODE_ENV } = require("./config");
+const {NODE_ENV} = require("./config");
 const errorHandler = require("./error-handler");
+const storesRouter = require("./stores/stores-router");
+
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(
     origin: CLIENT_ORIGIN,
   })
 );
+app.use('/api/stores', storesRouter)
+
 app.use((error, req, res, next) => {
   let response;
   if (process.env.NODE_ENV === "production") {
