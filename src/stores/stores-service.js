@@ -1,9 +1,9 @@
 const StoresService = {
-  getByLanguage(db, languages) {
+  getByLanguage(db, language) {
     return db
       .select('*')
       .from("stores")
-      .where("languages", "like", `%${languages}%`)
+      .where("languages", "like", `%${language}%`)
       
   },
   //with this where i cant compare exactly
