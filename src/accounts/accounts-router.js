@@ -21,7 +21,7 @@ accountsRouter
   .post(jsonParser, (req, res, next) => {
     const {username, password} = req.body;
     const newAccount = {username, password};
-    console.log("new account works", newAccount)
+   
     const numberOfValues = Object.values(req.body).filter(Boolean).length
     if (numberOfValues === 0)
       return res.status(400).json({
@@ -40,9 +40,9 @@ accountsRouter
 accountsRouter
   .route("/account")
   .get(jsonParser, (req, res, next) => {
-    console.log("this is req.params", req.body)
+   
     const { username, password } = req.body;
-    console.log('username and password', username, password)
+  
     AccountsService.getAccount(req.app.get("db"), username, password)
       .then((account) => {
         if(!account) {
@@ -60,10 +60,10 @@ accountsRouter
 
   .delete(jsonParser, (req, res, next) => {
     const { account_id } = req.body
-    console.log("account id is", account_id)
+   
     AccountsService.deleteAccount(req.app.get("db"), account_id)
       .then((numberOfAffectedRows) => {
-        console.log("affected", numberOfAffectedRows)
+       
         logger.info(`Account with id ${account_id} deleted`)
         res.status(204).end()
       })
@@ -83,7 +83,7 @@ accountsRouter
       })
       AccountsService.addNewFav(req.app.get('db'), accounts_id, store_id)
         .then((favorite) => {
-          console.log(favorite)
+       
           res.status(201).json(favorite)
           
         })
@@ -94,7 +94,7 @@ accountsRouter
   .route("/:favorite_id")
   .all((req, res, next) => {
     const {favorite_id} = req.params
-    console.log(favorite_id)
+ 
     AccountsService.getFav(req.app.get('db'), favorite_id)
       .then(favorite => {
         if (!favorite_id) {
@@ -117,10 +117,10 @@ accountsRouter
 
   .delete(jsonParser, (req, res, next) => {
     const { favorite_id } = req.params
-    console.log("route fav id is", favorite_id)
+  
     AccountsService.deleteFav(req.app.get('db'), favorite_id)
       .then((numberOfAffectedRows) => {
-        console.log("affected rows", numberOfAffectedRows)
+      
         logger.info(`Favorite with id ${favorite_id} deleted`)
         res.status(204).end()
       })

@@ -21,13 +21,13 @@ storesRouter
 storesRouter
   .route("/store")
   .all((req, res, next) => {
-    console.log("query", req.query)
+  
     const { language } = req.query;
-    console.log("this is language from req.query", language)
+   
    
     StoresService.getByLanguage(req.app.get("db"), language)
       .then((store) => {
-       console.log("store language is", store)
+      
         if (!store) {
           logger.error(`Store with language ${language} not found.`);
           return res.status(404).json({

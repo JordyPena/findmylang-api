@@ -33,11 +33,10 @@ const AccountsService = {
   },
 
   addNewFav(db, accounts_id, store_id) {
-    console.log("this is accounts_id query side", accounts_id)
-    console.log("this is store_id query side", store_id)
+   
     const newFav = {accounts_id: accounts_id,
     store_id: store_id}
-    console.log("this is newFav query side", newFav)
+ 
     return db
     .insert(newFav)
     .into('favorites')
