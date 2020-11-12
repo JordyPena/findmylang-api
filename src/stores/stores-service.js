@@ -20,6 +20,6 @@ const StoresService = {
       .select('*')
       .from('stores')
   }
-};
+ };
 
 module.exports = StoresService;

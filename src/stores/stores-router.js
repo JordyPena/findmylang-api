@@ -19,10 +19,11 @@ storesRouter
   });
 
 storesRouter
-  .route("/:language")
+  .route("/store")
   .all((req, res, next) => {
-    const { language } = req.params;
-    console.log("this is language from req.params", language)
+    console.log("query", req.query)
+    const { language } = req.query;
+    console.log("this is language from req.query", language)
    
     StoresService.getByLanguage(req.app.get("db"), language)
       .then((store) => {

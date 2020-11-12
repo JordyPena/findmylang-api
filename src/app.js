@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const {NODE_ENV} = require("./config");
 const errorHandler = require("./error-handler");
 const storesRouter = require("./stores/stores-router");
+const accountsRouter = require("./accounts/accounts-router");
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(
   })
 );
 app.use('/api/stores', storesRouter)
+app.use('/api/accounts', accountsRouter)
 
 app.use((error, req, res, next) => {
   let response;
