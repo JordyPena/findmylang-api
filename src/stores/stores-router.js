@@ -10,10 +10,11 @@ const jsonParser = express.json();
 storesRouter
   .route("/")
 
-  .get((req, res, next) => {
+  .get(jsonParser, (req, res, next) => {
     StoresService.getAll(req.app.get("db"))
       .then((stores) => {
         res.json(stores);
+       
       })
       .catch(next);
   });
@@ -27,7 +28,6 @@ storesRouter
    
     StoresService.getByLanguage(req.app.get("db"), language)
       .then((store) => {
-      
         if (!store) {
           logger.error(`Store with language ${language} not found.`);
           return res.status(404).json({
