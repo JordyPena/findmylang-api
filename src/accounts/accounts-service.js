@@ -3,7 +3,7 @@ const AccountsService = {
     return db
       .insert(newAccount)
       .into('accounts')
-      .returning('*')
+      .returning(['id','username'])
       .then(rows => {
         return rows[0];
       })
@@ -18,10 +18,11 @@ const AccountsService = {
 
   getAccount(db, username, password) {
     return db
-      .select('*')
+      .select(['id','username'])
       .from('accounts')
       .where({username: username,
       password: password})
+      .first()
   },
 
   deleteAccount(db, id) {
@@ -46,12 +47,12 @@ const AccountsService = {
     })
   },
 
-  getFav(db, id) {
+  getFav(db, accounts_id) {
     return db
       .from('favorites')
       .select('*')
-      .where('id', id)
-      .first()
+      .where('accounts_id', accounts_id)
+      
   },
 
   deleteFav(db, id) {

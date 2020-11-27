@@ -1,6 +1,7 @@
 const AccountsService = require('./accounts-service')
 const express = require('express')
 const logger = require('../logger')
+const { ConsoleTransportOptions } = require('winston/lib/winston/transports')
 
 
 const accountsRouter = express.Router()
@@ -39,7 +40,7 @@ accountsRouter
 
 accountsRouter
   .route("/account")
-  .get(jsonParser, (req, res, next) => {
+  .post(jsonParser, (req, res, next) => {
    
     const { username, password } = req.body;
   
@@ -70,7 +71,49 @@ accountsRouter
       .catch(next)
   })
 
+
+
 accountsRouter
+  .route("/favorite/:accounts_id")
+  .all((req, res, next) => {
+    
+    const {accounts_id} = req.params
+    console.log("this is accounts id", accounts_id)
+    AccountsService.getFav(req.app.get('db'), accounts_id)
+      .then(favorite => {
+        if (!accounts_id) {
+          logger.error(`Favorite with id ${accounts_id} not found`)
+          return res.status(404).json({
+            error: {
+              message: `Favorite Not Found`
+            }
+          })
+        }
+        res.favorite = favorite
+        next()
+      })
+      .catch(next)
+  })
+
+  .get((req, res) => {
+    res.json(res.favorite)
+  })
+
+  .delete(jsonParser, (req, res, next) => {
+
+    const favorite_id  = req.params.accounts_id
+    console.log("this is fav id", req.params)
+    AccountsService.deleteFav(req.app.get('db'), favorite_id)
+      .then((numberOfAffectedRows) => {
+      
+        logger.info(`Favorite with id ${favorite_id} deleted`)
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
+
+  accountsRouter
   .route("/favorite")
   .post(jsonParser, (req, res, next) => {
     const {accounts_id, store_id} = req.body
@@ -89,44 +132,6 @@ accountsRouter
         })
         .catch(next)
   })
-
-accountsRouter
-  .route("/:favorite_id")
-  .all((req, res, next) => {
-    const {favorite_id} = req.params
- 
-    AccountsService.getFav(req.app.get('db'), favorite_id)
-      .then(favorite => {
-        if (!favorite_id) {
-          logger.error(`Favorite with id ${favorite_id} not found`)
-          return res.status(404).json({
-            error: {
-              message: `Favorite Not Found`
-            }
-          })
-        }
-        res.favorite = favorite
-        next()
-      })
-      .catch(next)
-  })
-
-  .get((req, res) => {
-    res.json(res.favorite)
-  })
-
-  .delete(jsonParser, (req, res, next) => {
-    const { favorite_id } = req.params
-  
-    AccountsService.deleteFav(req.app.get('db'), favorite_id)
-      .then((numberOfAffectedRows) => {
-      
-        logger.info(`Favorite with id ${favorite_id} deleted`)
-        res.status(204).end()
-      })
-      .catch(next)
-  })
-
   
 
   module.exports = accountsRouter;

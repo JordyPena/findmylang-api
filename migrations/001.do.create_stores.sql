@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS stores (
   city VARCHAR(10) NOT NULL,
   "state" VARCHAR(2) NOT NULL,
   zip VARCHAR(5) NOT NULL,
-  languages VARCHAR(50) NOT NULL
+  languages VARCHAR(50) NOT NULL,
+  latitude VARCHAR(50) NOT NULL,
+  longitude VARCHAR(50) NOT NULL
 )
