@@ -14,9 +14,9 @@ VALUES
 ('T-Mobile', '4201', 'Gaston Ave', '100', 'Dallas', 'TX', '75246', 'Korean, Italian', '32.81021237521809', '-96.77620812602655'),
 ('T-Mobile', '4787', 'Vistawood Blvd', '100', 'Dallas', 'TX', '75232', 'French, Polish', '32.70266697150041', '-96.82919707391535'),
 ('T-Mobile', '9208', 'E R L Thornton Fwy Bldg B', '210', 'Dallas', 'TX', '75228', 'Tagalog, Urdu', '32.80214383380945', '-96.68720597432714'),
-('T-Mobile', '9540', 'Garland Rd', '417', 'Dallas', 'TX', '75218', ' Russian, Yiddish', '32.84650834265764', '-96.70046888430277'),
+('T-Mobile', '9540', 'Garland Rd', '417', 'Dallas', 'TX', '75218', 'Russian, Yiddish', '32.84650834265764', '-96.70046888430277'),
 ('T-Mobile', '10675', 'E Northwest Fwy', '1600', 'Dallas', 'TX', '75238', 'Chinese, Persian', '32.87313669582491', '-96.70355206320507'),
 ('T-Mobile', '3003', 'Knox St', '100', 'Dallas', 'TX', '75205', 'Japanese, Gujarati', '32.84251236304472', '-96.78320197203067'),
 ('T-Mobile', '9751', 'Webb Chapel Rd', '300', 'Dallas', 'TX', '75220', 'Hindi, Telugu', '32.891462778841884', '-96.8681360617038'),
 ('T-Mobile', '15707', 'Coit Rd', 'A', 'Dallas', 'TX', '75248', 'German, Bengali', '32.98369375487713', '-96.7700291683171'),
-('T-Mobile', '4390', 'I-30', '100', 'Dallas', 'TX', '75211', ' Spanish, Tai-Kadai', '32.785266839690536', '-96.90071686168538')
+('T-Mobile', '4390', 'I-30', '100', 'Dallas', 'TX', '75211', 'Spanish, Tai-Kadai', '32.785266839690536', '-96.90071686168538')

@@ -1,12 +1,21 @@
 const AccountsService = {
   addAccount(db, newAccount) {
-    return db
-      .insert(newAccount)
-      .into('accounts')
-      .returning(['id','username'])
-      .then(rows => {
-        return rows[0];
+    db
+      .select('*')
+      .from('accounts')
+      .where({username: newAccount.username})
+      .first()
+      .then(user => {
+        console.log("this is user", user)
+        return !user && db
+          .insert(newAccount)
+          .into('accounts')
+          .returning(['id','username'])
+          .then(rows => {
+            return rows[0];
+          })
       })
+     
   },
 
   getAllAccounts(db) {
