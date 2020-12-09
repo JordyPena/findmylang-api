@@ -1,6 +1,6 @@
 const AccountsService = {
   addAccount(db, newAccount) {
-    db
+    return db
       .select('*')
       .from('accounts')
       .where({username: newAccount.username})
@@ -8,10 +8,11 @@ const AccountsService = {
       .then(user => {
         console.log("this is user", user)
         return !user && db
-          .insert(newAccount)
+          .insert(newAccount, console.log("newAccount is", newAccount))
           .into('accounts')
           .returning(['id','username'])
           .then(rows => {
+            console.log("rows is", rows)
             return rows[0];
           })
       })

@@ -8,17 +8,20 @@ const accountsRouter = express.Router()
 //this speaks to my body
 const jsonParser = express.json()
 
-
+//get all accounts
 accountsRouter
   .route("/")
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     AccountsService.getAllAccounts(knexInstance)
       .then((accounts) => {
-        res.json(accounts)
+        res
+          .status(200)
+          .json(accounts)
       })
       .catch(next)
   })
+  //create a new account
   .post(jsonParser, (req, res, next) => {
     const {username, password} = req.body;
     const newAccount = {username, password};
@@ -30,9 +33,10 @@ accountsRouter
           message: `Request body must contain both 'username' and 'password'`,
         }
       })
-      
+
     AccountsService.addAccount(req.app.get('db'), newAccount)
       .then((account) => {
+        console.log("this is account", account)
         if (account === null) {
           return res.status(401).json({
             error: {
@@ -40,11 +44,14 @@ accountsRouter
             }
           })
         }
-        res.status(201).json(account)
+        res
+          .status(201)
+          .json(account)
       })
       .catch(next);
   })
 
+  //sign into account if exists
 accountsRouter
   .route("/account")
   .post(jsonParser, (req, res, next) => {
@@ -60,7 +67,9 @@ accountsRouter
           })
         }
         
-        res.json(account);
+        res
+          .status(201)
+          .json(account);
       })
     
       .catch(next)
@@ -79,7 +88,8 @@ accountsRouter
   })
 
 
-
+//get all favorites in current account
+//delete favorite selected in current account
 accountsRouter
   .route("/favorite/:accounts_id")
   .all((req, res, next) => {
@@ -119,7 +129,7 @@ accountsRouter
       .catch(next)
   })
 
-
+//add a new favorite into current account
   accountsRouter
   .route("/favorite")
   .post(jsonParser, (req, res, next) => {

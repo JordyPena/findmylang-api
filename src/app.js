@@ -33,8 +33,15 @@ app.use((error, req, res, next) => {
 const PORT = process.env.PORT || 9000;
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res
+  .status(200)
+  .send("Hello, world!");
 });
+
+app.get("/api/test", (req, res) => {
+  res.status(200)
+  .send("test works")
+})
 
 app.use(errorHandler);
 

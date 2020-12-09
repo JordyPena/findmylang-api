@@ -13,7 +13,9 @@ storesRouter
   .get(jsonParser, (req, res, next) => {
     StoresService.getAll(req.app.get("db"))
       .then((stores) => {
-        res.json(stores);
+        res
+        .status(200)
+        .json(stores);
        
       })
       .catch(next);
@@ -42,7 +44,9 @@ storesRouter
   })
 
   .get((req, res) => {
-    res.json(res.store);
+    res
+      .status(200)
+      .json(res.store);
   });
 
 module.exports = storesRouter;
