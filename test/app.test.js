@@ -42,7 +42,7 @@ describe('POST /api/accounts', () => {
   })
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
-    .expect(201,done)
+    .expect(201,done())
     
   })
 })
@@ -57,7 +57,7 @@ describe('Post /api/accounts/account', () => {
     })
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
-    .expect(201,done)
+    .expect(201,done())
   })
 })
 
@@ -67,18 +67,18 @@ describe('Get /api/accounts/favorite/:accounts_id', () => {
       .get('/api/accounts/favorite/1')
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
-    .expect(200,done)
+    .expect(200,done())
   })
 })
 //skipped since everytime the favorite id wont exist after we delete it
 //since we deleted it already when testing. add new fav than hardcode that id 
 //at the end of the url to get test to pass
-describe.skip('Delete /api/accounts/favorite/:accounts_id', () => {
-  it('DELETE a favorite in account', (end) => {
+describe('Delete /api/accounts/favorite/:accounts_id', () => {
+  it('DELETE a favorite in account', (done) => {
     request
-      .delete('/api/accounts/favorite/11')
+      .delete('/api/accounts/favorite/28')
     .set('Accept', 'application/json')
-    .expect(204,end)
+    .expect(204,done())
   })
 })
 
@@ -92,7 +92,7 @@ describe('post /api/accounts/favorite', () => {
       })
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
-    .expect(201,done)
+    .expect(201,done())
   })
 })
 
