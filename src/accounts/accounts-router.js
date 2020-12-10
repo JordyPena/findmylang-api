@@ -33,11 +33,11 @@ accountsRouter
           message: `Request body must contain both 'username' and 'password'`,
         }
       })
-
+      console.log("about to add account")
     AccountsService.addAccount(req.app.get('db'), newAccount)
       .then((account) => {
         console.log("this is account", account)
-        if (account === null) {
+        if (!account) {
           return res.status(401).json({
             error: {
               message: `User already exist, try signing in`

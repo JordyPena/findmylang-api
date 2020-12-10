@@ -70,7 +70,9 @@ describe('Get /api/accounts/favorite/:accounts_id', () => {
     .expect(200,done)
   })
 })
-
+//skipped since everytime the favorite id wont exist after we delete it
+//since we deleted it already when testing. add new fav than hardcode that id 
+//at the end of the url to get test to pass
 describe.skip('Delete /api/accounts/favorite/:accounts_id', () => {
   it('DELETE a favorite in account', (end) => {
     request
