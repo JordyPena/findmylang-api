@@ -1,28 +1,27 @@
 const AccountsService = {
-
   addAccount(db, newAccount) {
     // function that will create a new user
-    const createUser = () => (
-      db.insert(newAccount)
+    const createUser = () =>
+      db
+        .insert(newAccount)
         .into("accounts")
         .returning(["id", "username"])
         .then((rows) => {
           return rows[0];
-        })
-    );
-  
+        });
+
     // check to see if user exists
-    return db.select("*")
+    return db
+      .select("*")
       .from("accounts")
       .where({ username: newAccount.username })
       .first()
       .then((user) => {
-        console.log("this is user", user)
         // if user does exist return nothing
         if (user) return Promise.resolve();
         // if not return the result of createUser()
         return createUser();
-      })
+      });
   },
 
   getAllAccounts(db) {

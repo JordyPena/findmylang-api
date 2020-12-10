@@ -7,9 +7,6 @@ const errorHandler = require("./error-handler");
 const storesRouter = require("./stores/stores-router");
 const accountsRouter = require("./accounts/accounts-router");
 
-
-
-
 const app = express();
 
 const morganSetting = process.env.NODE_ENV === "production" ? "tiny" : "common";
@@ -17,8 +14,8 @@ const morganSetting = process.env.NODE_ENV === "production" ? "tiny" : "common";
 app.use(morgan(morganSetting));
 app.use(helmet());
 app.use(cors());
-app.use('/api/stores', storesRouter)
-app.use('/api/accounts', accountsRouter)
+app.use("/api/stores", storesRouter);
+app.use("/api/accounts", accountsRouter);
 
 app.use((error, req, res, next) => {
   let response;
@@ -29,19 +26,6 @@ app.use((error, req, res, next) => {
   }
   res.status(500).json(response);
 });
-
-const PORT = process.env.PORT || 9000;
-
-app.get("/", (req, res) => {
-  res
-  .status(200)
-  .send("Hello, world!");
-});
-
-app.get("/api/test", (req, res) => {
-  res.status(200)
-  .send("test works")
-})
 
 app.use(errorHandler);
 

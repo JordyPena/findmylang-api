@@ -1,17 +1,14 @@
 const StoresService = {
   getByLanguage(db, language) {
     return db
-      .select('*')
+      .select("*")
       .from("stores")
-      .where("languages", "like", `%${language}%`)
-      
+      .where("languages", "like", `%${language}%`);
   },
-  
+
   getAll(db) {
-    return db
-      .select('*')
-      .from('stores')
-  }
- };
+    return db.select("*").from("stores");
+  },
+};
 
 module.exports = StoresService;

@@ -1,16 +1,14 @@
-const logger = require('../logger')
+const logger = require("../logger");
 
-
-
-function getStoreValidationError({language}) {
+function getStoreValidationError({ language }) {
   if (!language) {
-    logger.error(`${language} must be selected`)
+    logger.error(`${language} must be selected`);
     return {
       error: {
-        message: `language must be selected`
-      }
-    }
+        message: `language must be selected`,
+      },
+    };
   }
 }
 
-module.exports = getStoreValidationError
+module.exports = getStoreValidationError;
