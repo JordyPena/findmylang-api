@@ -54,7 +54,6 @@ accountsRouter
     AccountsService.getAccount(req.app.get("db"), username, password)
       .then((account) => {
         if (!account) {
-          logger.error(`Account with id ${account_id} not found`);
           return res.status(404).json({
             error: { message: `Account Not Found` },
           });
