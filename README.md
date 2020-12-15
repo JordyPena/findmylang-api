@@ -1,26 +1,41 @@
-# Express Boilerplate!
+# FindMyLang
 
-This is a boilerplate project used for starting new projects!
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Set up
+## Live link 
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+https://find-my-lang-app.vercel.app/
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+![Screenshot](https://github.com/JordyPena/Portfolio/blob/main/images/project-screenshots/findmylang-app-screenshot.png)
 
-## Scripts
+## Summary
 
-Start the application `npm start`
+FindMyLang allows the you to find T-mobile store's in Dallas, TX that have
+representatives that speak the language you selected. Once a language is selected
+you can see your current location compared to the stores that match your request
+on a map. Click on the markers on the map for store details and a link to get directions from your current location. You can create an account in order to be
+able to add stores to your favorites.
 
-Start nodemon for the application `npm run dev`
+## Environment 
 
-Run the tests `npm test`
+Fullstack app using React.js, CSS, Node, Express, and PostgreSQL.
 
-## Deploying
+## API 
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+FindMyLang API fetches all the stores in the database, all of the accounts created and favorites of those accounts.
+
+Endpoints: 
+
+GET /api/stores  returns all stores
+
+GET /api/stores/store  returns stores that match the language selected
+
+GET /api/accounts  returns returns all accounts
+
+POST /api/accounts  creates a new account, req.body needs username and password
+
+POST /api/accounts/  account logs into account, req.body needs username and password
+
+GET  /api/accounts/favorite/  accounts_id returns all favorites in account, req.params needs accounts_id
+
+POST /api/accounts/favorite  creates a new favorite in current account, req.body needs accounts_id and store_id
