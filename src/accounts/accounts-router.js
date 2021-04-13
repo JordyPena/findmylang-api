@@ -1,6 +1,5 @@
 const AccountsService = require("./accounts-service");
 const express = require("express");
-const logger = require("../logger");
 const { ConsoleTransportOptions } = require("winston/lib/winston/transports");
 
 const accountsRouter = express.Router();
@@ -70,7 +69,7 @@ accountsRouter
 
     AccountsService.deleteAccount(req.app.get("db"), account_id)
       .then((numberOfAffectedRows) => {
-        logger.info(`Account with id ${account_id} deleted`);
+     
         res.status(204).end();
       })
       .catch(next);
@@ -86,7 +85,7 @@ accountsRouter
     AccountsService.getFav(req.app.get("db"), accounts_id)
       .then((favorite) => {
         if (!accounts_id) {
-          logger.error(`Favorite with id ${accounts_id} not found`);
+       
           return res.status(404).json({
             error: {
               message: `Favorite Not Found`,
@@ -108,7 +107,7 @@ accountsRouter
 
     AccountsService.deleteFav(req.app.get("db"), favorite_id)
       .then((numberOfAffectedRows) => {
-        logger.info(`Favorite with id ${favorite_id} deleted`);
+    
         res.status(204).end();
       })
       .catch(next);
